@@ -1,0 +1,30 @@
+---
+title: "tutorial"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{HW3}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(HW3)
+```
+
+
+## Loading the melbourne housing dataset, so we can test our package.
+```{r setup}
+data <- read.csv("C:/Users/s-edw/Documents/HW3/data/melb_data.csv")
+```
+
+To use the function 'lm2':
+
+```{r}
+
+```
+
+To use the function 'anova2':
