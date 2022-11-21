@@ -11,7 +11,7 @@ anova2(formula,data,subset,na.action)
 
 \item{data}{A matrix of (nxp) whose data will be used to form the model.}
 
-\item{na.action}{How will the missing values be handled. It is defauled to "omit" value.}
+\item{na.action}{How will the missing values be handled. It is defaulted to "omit" value.}
 }
 \value{
 A matrix that contains degrees of freedom, sum of squares, mean sum of
@@ -22,8 +22,7 @@ linear regression model.
 Performs ANOVA of the linear regression model
 }
 \examples{
-data = read.csv("data/melb_data.csv")
-output = anova2(data$Price~data$Bedroom2+data$Bathroom+data$Landsize,data,
+output = anova2(melb_data$Price~melb_data$Bedroom2+melb_data$Bathroom+melb_data$Landsize,melb_data,
 na.action="omit")
 ss = output[,2]
 f = output[,4]
