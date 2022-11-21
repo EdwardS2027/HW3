@@ -1,6 +1,6 @@
 ---
 title: "tutorial"
-output: rmarkdown::html_vignette
+output: html_vignette
 description: >
   This vingette describes how to use 'lm2()' and 'anova2' and what kind of 
   parameters they accepts and the values they return. Additionally, this 
