@@ -3,7 +3,7 @@
 \docType{data}
 \name{melb_data}
 \alias{melb_data}
-\title{College Admission Data}
+\title{Melbourne Housing data}
 \format{
 13580 rows and 21 columns
 }
@@ -11,7 +11,7 @@
 \href{https://www.kaggle.com/code/alexisbcook/missing-values/data?select=melb_data.csv}
 }
 \usage{
-data(melb_data)
+melb_data
 }
 \description{
 Data that was scraped from Domain.com.au weekly. This data give certain
@@ -19,6 +19,6 @@ details about the housing in Melbourne, such as "Rooms", "Price", etc.
 This csv file contains 13580 rows and 21 columns.
 }
 \examples{
-data(melb_data)
+melb_data
 }
 \keyword{datasets}

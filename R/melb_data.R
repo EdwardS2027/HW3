@@ -1,4 +1,4 @@
-#' College Admission Data
+#' Melbourne Housing data
 #'
 #' @description
 #' Data that was scraped from Domain.com.au weekly. This data give certain
@@ -11,12 +11,12 @@
 #' @docType data
 #'
 #' @usage
-#' data(melb_data)
+#' melb_data
 #'
 #' @keywords datasets
 #'
 #' @source \href{https://www.kaggle.com/code/alexisbcook/missing-values/data?select=melb_data.csv}
 #'
 #' @examples
-#' data(melb_data)
+#' melb_data
 "melb_data"
