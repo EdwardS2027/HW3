@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 library(HW3)
-options(max.print=30)
+options(max.print=5)
 ```
 
 
