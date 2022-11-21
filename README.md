@@ -5,7 +5,7 @@
 
 ## Overview
 'HW3' package is created for the purpose of copying the lm() and anova() functions, which can give us the fitted linear regression model and the results of hypothesis testing:
-* 'lm2()' fits the linear regression model based on given formula and data, and returns the linear regression model and the results of hypothesis testing.
+* 'lm2()' fits the linear regression model based on given formula and data, and returns the values similar to ones given from the 'summary()'
 * 'anova2()' performs analysis of varaince on the fitted linear regression model for the purpose of hypothesis testing.
 
 
@@ -30,8 +30,8 @@ library("HW3")
 data <- read.csv("data/melb_data.csv")
 attach(data)
 library("HW3")
-lm2(Price~Rooms+I(Method)+YearBuilt+Car+Landsize,data,Price>10000,na.action="omit",intercept=TRUE)
-anova2(Price~Rooms+I(Method)+YearBuilt+Car+Landsize,data,Price>10000,na.action="omit",intercept=TRUE)
+lm2(Price~Rooms+I(Method)+YearBuilt+Car+Landsize,data,na.action="omit")
+anova2(Price~Rooms+I(Method)+YearBuilt+Car+Landsize,data,na.action="omit")
 ```
 
 ## Contact
