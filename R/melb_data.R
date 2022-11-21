@@ -5,6 +5,9 @@
 #' details about the housing in Melbourne, such as "Rooms", "Price", etc.
 #' This csv file contains 13580 rows and 21 columns.
 #'
+#' @format
+#' 13580 rows and 21 columns
+#'
 #' @docType data
 #'
 #' @usage
@@ -16,4 +19,4 @@
 #'
 #' @examples
 #' data <- read.csv("data/melb_data.csv")
-#'
+"melb_data"

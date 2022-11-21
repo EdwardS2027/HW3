@@ -22,9 +22,87 @@ data <- read.csv("C:/Users/s-edw/Documents/HW3/data/melb_data.csv")
 ```
 
 To use the function 'lm2':
+lm2 is function that fits a linear regression model on a data according to 
+the formula provided.
+
+
+
+```{r}
+
+
+```
+
+To use the function 'anova2':
+```{r}
+
+```
+
+### Comparison(lm2 vs. lm)
+```{r}
+lm2_output = lm2(data$Price~data$Propertycount+data$YearBuilt+data$Bathroom*data$Bedroom2,data,na.action = "omit",intercept = TRUE)
+lm_output = summary(lm(data$Price~data$Propertycount+data$YearBuilt+data$Bathroom*data$Bedroom2,data,na.action=na.omit))
+
+```
+
+
+** Compare residuals
+```{r}
+all.equal(lm2_output$residuals, as.vector(lm_output$residuals))
+bench::mark(lm2_output$residuals, as.vector(lm_output$residuals))
+```
+
+** Compare sigma
+```{r}
+all.equal(lm2_output$sigma, lm_output$sigma,) 
+bench::mark(lm2_output$sigma, lm_output$sigma)
+
+```
+
+** Compare coefficients
+```{r}
+all.equal(lm2_output$coefficients, lm_output$coefficients) 
+bench::mark(lm2_output$coefficients, lm_output$coefficients)
+
+```
+
+** Compare R Squared
+```{r}
+all.equal(lm2_output$r.squared, lm_output$r.squared) 
+bench::mark(lm2_output$r.squared, lm_output$r.squared)
+```
+
+** Compare Adjusted R Squared
+```{r}
+all.equal(lm2_output$adj.r.squared, lm_output$adj.r.squared) 
+bench::mark(lm2_output$adj.r.squared, lm_output$adj.r.squared)
+```
+** Compare Variance Covariance Matrix
+```{r}
+all.equal(lm2_output$var_cov, vcov(lm_output)) 
+bench::mark(lm2_output$var_cov, vcov(lm_output))
+```
+** Compare Covariance Unscaled
+```{r}
+all.equal(lm2_output$cov.unscaled, lm_output$cov.unscaled) 
+bench::mark(lm2_output$cov.unscaled, lm_output$cov.unscaled)
+```
+** Compare F Statistic
+```{r}
+all.equal(as.vector(lm2_output$fstatistic), as.vector(lm_output$fstatistic)) 
+bench::mark(as.vector(lm2_output$fstatistic), as.vector(lm_output$fstatistic))
+```
+
+
+### Comparison(anova2 vs. anova)
+```{r}
+anova2_output = anova2(data$Price~data$Propertycount+data$YearBuilt+data$Bathroom*data$Bedroom2,data,na.action = "omit",intercept = TRUE)
+anova_output = anova(lm(data$Price~data$Propertycount+data$YearBuilt+data$Bathroom*data$Bedroom2,data,na.action=na.omit))
+```
+
 
 ```{r}
 
 ```
 
-To use the function 'anova2':
+
+

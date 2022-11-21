@@ -3,14 +3,14 @@
 #' @description
 #' Performs ANOVA of the linear regression model
 #'
+#' @usage
+#' anova2(formula,data,subset,na.action,intercept)
+#'
 #' @param formula
 #' A framework for how should the linear regression model be given.
 #'
 #' @param data
 #' A matrix of (nxp) whose data will be used to form the model.
-#'
-#' @param subset
-#' The conditions of which rows in data will be used.
 #'
 #' @param na.action
 #' How will the missing values be handled. It is defauled to "omit" value.
@@ -30,11 +30,14 @@
 #' na.action="omit",intercept=TRUE)
 #' ss = output[,2]
 #' f = output[,4]
+#'
+#' @export
+#'
 
-anova2 <-function(formula,data,subset,na.action = "omit",intercept= TRUE)
+anova2 <-function(formula,data,na.action = "omit",intercept= TRUE)
 {
   # Runs the lm2() function to get the needed values for anova
-  output = lm2(formula,data,subset,na.action,intercept)
+  output = lm2(formula,data,na.action,intercept)
 
   # Intializes the neede values from the return of lm2()
   y = output$y
@@ -43,13 +46,14 @@ anova2 <-function(formula,data,subset,na.action = "omit",intercept= TRUE)
   SSR = output$SSR
   SSY = SSR+SSE
 
-
+  # Initializes empty vectors for desired outputs
   df = c()
   ss = c()
   MS = c()
   f = c()
   p = c()
 
+  #Considers how SS will be calucated depending on if intercept was used or not.
   if(intercept==TRUE)
   {
     start = 2
@@ -59,6 +63,8 @@ anova2 <-function(formula,data,subset,na.action = "omit",intercept= TRUE)
     start = 1
   }
 
+  # For each covariate, calculates the sequential sum of squares and binds to
+  # correct output vector.
   previous = 0
   for( i in (start:ncol(x)))
   {
@@ -74,7 +80,7 @@ anova2 <-function(formula,data,subset,na.action = "omit",intercept= TRUE)
     }
     else
     {
-       new_x=x[,1:i,drop=FALSE]
+      new_x=x[,1:i,drop=FALSE]
     }
     inverse_prod = solve(t(new_x)%*%new_x)
     betas = inverse_prod%*%t(new_x)
@@ -92,19 +98,23 @@ anova2 <-function(formula,data,subset,na.action = "omit",intercept= TRUE)
 
   }
 
+  # Converts the sequential sum of squares to the f statistics values
   f= ss/(SSE/(nrow(x)-ncol(x)))
+
+  # For each f statistic value, convert it into p values
   for(i in (1:length(f)))
   {
     p=c(p,pf(f[i],1,nrow(x)-ncol(x),lower.tail=FALSE))
   }
-  p = signif(p, digits = 4)
+
+  # For residuals, correctly add it to the output vectors.
   df = c(df,(nrow(x)-ncol(x)))
   ss= c(ss,SSE)
   MS=c(MS,(SSE/(nrow(x)-ncol(x))))
   f = c(f,NA)
   p=c(p,NA)
 
-
+  # Creates the output matrix for the return
   output=cbind(df,ss)
   output=cbind(output,MS)
   output=cbind(output,f)
