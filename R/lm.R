@@ -27,7 +27,7 @@
 #'
 #' @examples
 #' data = read.csv("data/melb_data.csv")
-#' output = lm2(data$Price~data$Bedroom2+data$Bathroom+data$Landsize,data,
+#' output = lm2(data$Price~data$Bedroom2+data$Bathroom+data$Landsize,melb_data,
 #' na.action="omit")
 #' betas = output$coefficients
 #' res = output$residuals

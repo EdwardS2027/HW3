@@ -21,8 +21,7 @@
 #' linear regression model.
 #'
 #' @examples
-#' data = read.csv("data/melb_data.csv")
-#' output = anova2(data$Price~data$Bedroom2+data$Bathroom+data$Landsize,data,
+#' output = anova2(data$Price~data$Bedroom2+data$Bathroom+data$Landsize,melb_data,
 #' na.action="omit")
 #' ss = output[,2]
 #' f = output[,4]
