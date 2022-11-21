@@ -1,6 +1,6 @@
 ---
 title: "tutorial"
-output: html_vignette
+output: rmarkdown::html_vignette
 description: >
   This vingette describes how to use 'lm2()' and 'anova2' and what kind of 
   parameters they accepts and the values they return. Additionally, this 
@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(bench)
 ```
 
 
@@ -35,7 +36,7 @@ options(max.print=5)
 
 ## Loading the melbourne housing dataset, so we can test our package.
 ```{r setup2}
-data <- read.csv("C:/Users/s-edw/Documents/HW3/data/melb_data.csv")
+data <- melb_data
 ```
 
 This package contains two function:
