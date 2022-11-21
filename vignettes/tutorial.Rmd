@@ -27,15 +27,13 @@ This vignette will give an introduction of 'lm2' and 'anova2'. It will describe
 'lm2' and 'anova2', and give wide examples of they might be used.
 It will also compare 'lm2' and 'anova2' against 'lm' and 'anova' respectively. 
 
-Additionally, this vingette will briefly go over on how to load "melb_data.csv",
+Additionally, this vignette will briefly go over on how to load "melb_data.csv",
 a sample dataset, which we will use for vignette.
 
 ## Loading the melbourne housing dataset, so we can test our package.
 ```{r setup}
 data <- read.csv("C:/Users/s-edw/Documents/HW3/data/melb_data.csv")
 ```
-
-
 
 This package contains two function:
 * 'lm2': Mimics the 'lm' function
@@ -245,7 +243,7 @@ all.equal(lm2_output$cov.unscaled, lm_output$cov.unscaled)
 bench::mark(lm2_output$cov.unscaled, lm_output$cov.unscaled)
 ```
 ** Compare F Statistic
-```{r F comparision}
+```{r lm-F comparision}
 all.equal(as.vector(lm2_output$fstatistic), as.vector(lm_output$fstatistic)) 
 bench::mark(as.vector(lm2_output$fstatistic), as.vector(lm_output$fstatistic))
 ```
