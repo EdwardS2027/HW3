@@ -4,7 +4,7 @@
 \alias{lm2}
 \title{Linear Regression and Hypothesis Testing}
 \usage{
-lm2(formula,data,na.action)
+lm2(formula,data,na.action="omit")
 }
 \arguments{
 \item{formula}{A framework for how should the linear regression model be given.}
