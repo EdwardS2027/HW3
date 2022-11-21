@@ -11,12 +11,12 @@
 #' @docType data
 #'
 #' @usage
-#' read.csv("data/melb_data.csv")
+#' data(melb_data)
 #'
 #' @keywords datasets
 #'
 #' @source \href{https://www.kaggle.com/code/alexisbcook/missing-values/data?select=melb_data.csv}
 #'
 #' @examples
-#' data <- read.csv("data/melb_data.csv")
-"melb_data"
+#' data(melb_data)
+"melb_data" <- read.csv("data/melb_data.csv")
