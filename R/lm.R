@@ -32,6 +32,8 @@
 #' betas = output$coefficients
 #' res = output$residuals
 #'
+#' @export
+#'
 lm2 <- function(formula,data,na.action = "omit")
 {
 
@@ -121,4 +123,3 @@ lm2 <- function(formula,data,na.action = "omit")
               "cov.unscaled"=unscaled_cov,"fstatistic"=fstatistic,
               "var_cov"=var_cov,"SSE"=SSE,"SSR"=SSR,"SSY"=SSY,"x"=x,"y"=y))
 }
-

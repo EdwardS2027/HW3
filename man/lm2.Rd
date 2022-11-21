@@ -4,34 +4,31 @@
 \alias{lm2}
 \title{Linear Regression and Hypothesis Testing}
 \usage{
-lm2(formula, data, subset, na.action = "omit", intercept = TRUE)
+lm2(formula,data,na.action)
 }
 \arguments{
 \item{formula}{A framework for how should the linear regression model be given.}
 
 \item{data}{A matrix of (nxp) whose data will be used to form the model.}
 
-\item{subset}{The conditions of which rows in data will be used.}
-
 \item{na.action}{How will the missing values be handled. It is defauled to "omit" value.}
-
-\item{intercept}{A boolean value if the linear regression model will have an
-intercept or not. It is defaulted to TRUE.}
 }
 \value{
+A list that contains the following for the fitted linear regression model:
 coefficients of the linear regression model, residuals, sigma, coefficient
 of determination, adjusted coefficient of determination, unscaled covariance,
 f statistic, variance-covariance matrix, SSE, SSR, SSY, design matrix, and
-response
+the response
 }
 \description{
-Preprocess the data, fits a specficed linear regression model, and performs
-basic hypothesis testing
+Preprocess the data, fits a specified linear regression model, and performs
+basic hypothesis testing. It is deisgned to copy some of the values from the
+summary of the lm().
 }
 \examples{
 data = read.csv("data/melb_data.csv")
 output = lm2(data$Price~data$Bedroom2+data$Bathroom+data$Landsize,data,
-na.action="omit",intercept=TRUE)
+na.action="omit")
 betas = output$coefficients
 res = output$residuals
 
