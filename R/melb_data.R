@@ -19,4 +19,5 @@
 #'
 #' @examples
 #' data(melb_data)
-"melb_data" <- read.csv("data/melb_data.csv")
+"melb_data" <- as.data.frame(read.csv("data/melb_data.csv"))
+
