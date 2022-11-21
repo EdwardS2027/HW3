@@ -4,7 +4,7 @@
 #' Performs ANOVA of the linear regression model
 #'
 #' @usage
-#' anova2(formula,data,subset,na.action)
+#' anova2(formula,data,na.action="omit")
 #'
 #' @param formula
 #' A framework for how should the linear regression model be given.

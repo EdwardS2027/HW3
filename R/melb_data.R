@@ -20,4 +20,3 @@
 #' @examples
 #' melb_data
 "melb_data"
-

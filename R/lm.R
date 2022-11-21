@@ -6,7 +6,7 @@
 #' summary of the lm().
 #'
 #' @usage
-#' lm2(formula,data,na.action)
+#' lm2(formula,data,na.action="omit")
 #'
 #' @param formula
 #' A framework for how should the linear regression model be given.
