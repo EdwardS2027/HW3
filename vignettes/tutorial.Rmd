@@ -35,8 +35,6 @@ This package contains two function:
 * 'lm2': Mimics the 'lm' function
 * 'anova2': Mimics the 'anova' function
 
-
-
 ## 'lm2()': Fits a linear regression model and performs basic hypothesis testing
 
 
