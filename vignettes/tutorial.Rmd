@@ -1,6 +1,11 @@
 ---
 title: "tutorial"
 output: rmarkdown::html_vignette
+description: >
+  This vingette describes how to use 'lm2()' and 'anova2' and what kind of 
+  parameters they accepts and the values they return. Additionally, this 
+  vingette will give examples of the usuage of 'lm2()' and 'anova2()' and 
+  compare 'lm2()' and 'anova2()' against 'lm()' and 'anova()'.
 vignette: >
   %\VignetteIndexEntry{HW3}
   %\VignetteEngine{knitr::rmarkdown}
@@ -13,96 +18,276 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 library(HW3)
+options(max.print=30)
 ```
 
+
+## Overview
+This vignette will give an introduction of 'lm2' and 'anova2'. It will describe
+'lm2' and 'anova2', and give wide examples of they might be used.
+It will also compare 'lm2' and 'anova2' against 'lm' and 'anova' respectively. 
+
+Additionally, this vingette will briefly go over on how to load "melb_data.csv",
+a sample dataset, which we will use for vignette.
 
 ## Loading the melbourne housing dataset, so we can test our package.
 ```{r setup}
 data <- read.csv("C:/Users/s-edw/Documents/HW3/data/melb_data.csv")
 ```
 
+
+
+This package contains two function:
+* 'lm2': Mimics the 'lm' function
+* 'anova2': Mimics the 'anova' function
+
+
+
+## 'lm2()': Fits a linear regression model and performs basic hypothesis testing
+
+
 To use the function 'lm2':
 lm2 is function that fits a linear regression model on a data according to 
 the formula provided.
 
+'lm2()' accepts the following parameters:
+* 'formula': A framework for how should the linear regression model be given.
+  ex: y~x
+* 'data': A matrix of (nxp) whose data will be used to form the model.
+* 'na.action': How will the missing values be handled. It is defauled to "omit" value.
+
+'lm2()' returns the following values:
+A list containing coefficient matrix, residuals, sigma, r.squared, adj.r.squared,
+cov.unscaled, fstatistic, var_cov, SSE, SSR, SSY, x, and y.
+
+These values in the list are designed to be same as the ones provided by summary(lm)
+and help 'anova2' perform analysis of variance.
 
 
-```{r}
+** Simple usage of 'lm2()' ~ simple linear regression
+```{r lm2-SLR}
+output = lm2(data$Price~data$Landsize,data)
+output
+```
+** We can chose not to add the intercept to the model by adding -1 in the 
+** formula parameter like this
+```{r lm2- no intercept}
+output = lm2(data$Price~-1+data$Landsize,data)
+output
+```
 
+** Other than simple linear regression model, we can use 'lm2' to create 
+** multiple linear regression model with the use of '+'
+```{r lm2-MLR}
+output = lm2(data$Price~data$Landsize+data$YearBuilt,data)
+output
 
 ```
+
+
+** We can opt to add interaction terms to the formula parameter in 'lm2()'
+** by adding '*'
+```{r lm2-interaction}
+output = lm2(data$Price~data$Landsize+data$YearBuilt+data$Bedroom2*data$Rooms,data)
+output
+```
+
+** 'lm2' can set up reference cell coding scheme or cell means coding scheme to help model categorical variables
+** by using 'factor()'
+```{r lm2-categorical variables}
+output = lm2(data$Price~factor(data$Rooms),data)
+output
+
+output = lm2(data$Price~-1+factor(data$Rooms),data)
+output
+
+```
+
+
+
+** Lastly, we can determine how the 'lm2()" will handle the missing values in the
+** data.
+** If na.action is fail, the function will return the data
+** If the na.action is omit, the function will omit rows ith missing values
+** Otherwise, it will proceed normally.
+```{r lm2- na.action}
+output = lm2(data$Price~data$Landsize,data,na.action='omit')
+output
+
+output = lm2(data$Price~data$Landsize,data,na.action='fail')
+output
+
+```
+
+
+## 'anova2()': Performs analysis of variance on fitted linear regression model
 
 To use the function 'anova2':
+'anova2' is function that performs analysis of variance on fitted linear 
+regression model given by 'lm2()'. 
+
+'anova2()' accepts the following parameters:
+* 'formula': A framework for how should the linear regression model be given.
+  ex: y~x
+* 'data': A matrix of (nxp) whose data will be used to form the model.
+* 'na.action': How will the missing values be handled. It is defauled to "omit" value.
+
+'anova2()' returns the following values:
+A matrix that contains the df, sum of squares, mean sum of squares, F statistic, and
+p value for each coefficent and the residuals.
+
+** Simple example of 'anova2()' ~ simple linear regression model
+```{r anova2-SLR}
+output = anova2(data$Price~data$Landsize,data)
+output
+```
+
+** We can chose not to add the intercept to the 'model'anova2()' by adding -1 in the 
+** formula parameter like this. This will make 'anova2()' perform analysis of 
+** variance on a model without intercept.
 ```{r}
+output = anova2(data$Price~-1+data$Landsize,data)
+output
 
 ```
 
-### Comparison(lm2 vs. lm)
+** Other than simple linear regression model, 'anova2()' can perform analysis of variance
+** on multiple linear regression model by using '+' in the formula parameter.
+```{r anova2-MLR}
+output = anova2(data$Price~data$Landsize+data$YearBuilt,data)
+output
+
+```
+
+
+
+** We can opt to add interaction terms to the formula parameter in 'anova2()'
+** by adding '*'. 'anova2()' can perform analysis of variance on models with
+** interaction terms.
+```{r anova2-Interaction}
+output = anova2(data$Price~data$Landsize+data$YearBuilt+data$Bedroom2*data$Rooms,data)
+output
+```
+** 'anova2' can perform analysis of variance on models using reference cell coding scheme
+** or cell means coding scheme
+** by using 'factor()'.
+```{r anova2-Categorical variables}
+output = anova2(data$Price~factor(data$Rooms),data)
+output
+
+output = anova2(data$Price~-1+factor(data$Rooms),data)
+output
+```
+
+
+** Lastly, we can determine how 'anova2' will handle the missing values
+** by setting the na.action parameter.
+** If na.action is fail, the funtion will return the data
+** If the na.action is omit, the function will omit rows ith missing values
+** Otherwise, it will proceed normally.
 ```{r}
-lm2_output = lm2(data$Price~data$Propertycount+data$YearBuilt+data$Bathroom*data$Bedroom2,data,na.action = "omit",intercept = TRUE)
+output = anova2(data$Price~data$Landsize,data,na.action='omit')
+output
+
+output = anova2(data$Price~data$Landsize,data,na.action='fail')
+output
+
+```
+
+
+### Performance Testing~(lm2 vs. lm)
+```{r}
+lm2_output = lm2(data$Price~data$Propertycount+data$YearBuilt+data$Bathroom*data$Bedroom2,data,na.action = "omit")
 lm_output = summary(lm(data$Price~data$Propertycount+data$YearBuilt+data$Bathroom*data$Bedroom2,data,na.action=na.omit))
 
 ```
 
 
 ** Compare residuals
-```{r}
+```{r residual comparision}
 all.equal(lm2_output$residuals, as.vector(lm_output$residuals))
 bench::mark(lm2_output$residuals, as.vector(lm_output$residuals))
 ```
 
 ** Compare sigma
-```{r}
+```{r sigma comparison}
 all.equal(lm2_output$sigma, lm_output$sigma,) 
 bench::mark(lm2_output$sigma, lm_output$sigma)
 
 ```
 
 ** Compare coefficients
-```{r}
+```{r coeff comparision}
 all.equal(lm2_output$coefficients, lm_output$coefficients) 
 bench::mark(lm2_output$coefficients, lm_output$coefficients)
 
 ```
 
 ** Compare R Squared
-```{r}
+```{r R comparision}
 all.equal(lm2_output$r.squared, lm_output$r.squared) 
 bench::mark(lm2_output$r.squared, lm_output$r.squared)
 ```
 
 ** Compare Adjusted R Squared
-```{r}
+```{r adj R comparison}
 all.equal(lm2_output$adj.r.squared, lm_output$adj.r.squared) 
 bench::mark(lm2_output$adj.r.squared, lm_output$adj.r.squared)
 ```
 ** Compare Variance Covariance Matrix
-```{r}
+```{r vcov comparision}
 all.equal(lm2_output$var_cov, vcov(lm_output)) 
 bench::mark(lm2_output$var_cov, vcov(lm_output))
 ```
 ** Compare Covariance Unscaled
-```{r}
+```{r cov comparision}
 all.equal(lm2_output$cov.unscaled, lm_output$cov.unscaled) 
 bench::mark(lm2_output$cov.unscaled, lm_output$cov.unscaled)
 ```
 ** Compare F Statistic
-```{r}
+```{r F comparision}
 all.equal(as.vector(lm2_output$fstatistic), as.vector(lm_output$fstatistic)) 
 bench::mark(as.vector(lm2_output$fstatistic), as.vector(lm_output$fstatistic))
 ```
 
 
-### Comparison(anova2 vs. anova)
+### Performance Testing~(anova2 vs. anova)
 ```{r}
-anova2_output = anova2(data$Price~data$Propertycount+data$YearBuilt+data$Bathroom*data$Bedroom2,data,na.action = "omit",intercept = TRUE)
+anova2_output = anova2(data$Price~data$Propertycount+data$YearBuilt+data$Bathroom*data$Bedroom2,data,na.action = "omit")
 anova_output = anova(lm(data$Price~data$Propertycount+data$YearBuilt+data$Bathroom*data$Bedroom2,data,na.action=na.omit))
 ```
 
 
-```{r}
+** Compare Degrees of Freedom
+```{r DF comparision}
+all.equal(unname(anova2_output[,1]), unname(anova_output$Df))
+bench::mark(unname(anova2_output[,1]), unname(anova_output$Df))
+```
+
+** Compare Sum of Squares (Sequential)
+```{r SS comparision}
+all.equal(unname(anova2_output[,2]), unname(anova_output$"Sum Sq"))
+bench::mark(unname(anova2_output[,2]), unname(anova_output$"Sum Sq"))
+```
+
+** Compare Mean Sum of Squares
+```{r MSE comparison}
+all.equal(unname(anova2_output[,3]), unname(anova_output$"Mean Sq"))
+bench::mark(unname(anova2_output[,3]), unname(anova_output$"Mean Sq"))
 
 ```
 
 
+** Compare F Statistics
+```{r F comparision}
+all.equal(unname(anova2_output[,4]), unname(anova_output$"F value"))
+bench::mark(unname(anova2_output[,4]), unname(anova_output$"F value"))
+```
+
+
+** Compare P values
+```{r p value comparison}
+all.equal(unname(anova2_output[,5]), unname(anova_output$"Pr(>F)"))
+bench::mark(unname(anova2_output[,5]), unname(anova_output$"Pr(>F)"))
+```
 

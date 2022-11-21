@@ -4,7 +4,7 @@
 #' Performs ANOVA of the linear regression model
 #'
 #' @usage
-#' anova2(formula,data,subset,na.action,intercept)
+#' anova2(formula,data,subset,na.action)
 #'
 #' @param formula
 #' A framework for how should the linear regression model be given.
@@ -15,10 +15,6 @@
 #' @param na.action
 #' How will the missing values be handled. It is defauled to "omit" value.
 #'
-#' @param intercept
-#' A boolean value if the linear regression model will have an
-#' intercept or not. It is defaulted to TRUE.
-#'
 #' @return
 #' A matrix that contains degrees of freedom, sum of squares, mean sum of
 #' squares, f statistics, p values for each of the covariates in the fitted
@@ -27,17 +23,21 @@
 #' @examples
 #' data = read.csv("data/melb_data.csv")
 #' output = anova2(data$Price~data$Bedroom2+data$Bathroom+data$Landsize,data,
-#' na.action="omit",intercept=TRUE)
+#' na.action="omit")
 #' ss = output[,2]
 #' f = output[,4]
 #'
 #' @export
 #'
 
-anova2 <-function(formula,data,na.action = "omit",intercept= TRUE)
+anova2 <-function(formula,data,na.action = "omit")
 {
   # Runs the lm2() function to get the needed values for anova
-  output = lm2(formula,data,na.action,intercept)
+  output = lm2(formula,data,na.action)
+  if(is.data.frame(output))
+  {
+    return(output)
+  }
 
   # Intializes the neede values from the return of lm2()
   y = output$y
@@ -54,6 +54,14 @@ anova2 <-function(formula,data,na.action = "omit",intercept= TRUE)
   p = c()
 
   #Considers how SS will be calucated depending on if intercept was used or not.
+  if("(Intercept)" %in% colnames(x))
+  {
+    intercept = TRUE
+  }
+  else
+  {
+    intercept = FALSE
+  }
   if(intercept==TRUE)
   {
     start = 2
@@ -120,7 +128,14 @@ anova2 <-function(formula,data,na.action = "omit",intercept= TRUE)
   output=cbind(output,f)
   output=cbind(output,p)
   colnames(output)=c("Df","Sum Sq","Mean Sq","F value","Pr(>F)")
-
+  if (intercept==TRUE)
+  {
+    rownames(output) = c(colnames(x)[-1],"Residuals")
+  }
+  else
+  {
+    rownames(output) = c(colnames(x),"Residuals")
+  }
 
   return(output)
 }

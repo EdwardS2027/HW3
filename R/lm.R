@@ -6,7 +6,7 @@
 #' summary of the lm().
 #'
 #' @usage
-#' lm2(formula,data,subset,na.action,intercept)
+#' lm2(formula,data,na.action)
 #'
 #' @param formula
 #' A framework for how should the linear regression model be given.
@@ -17,9 +17,6 @@
 #' @param na.action
 #' How will the missing values be handled. It is defauled to "omit" value.
 #'
-#' @param intercept
-#' A boolean value if the linear regression model will have an
-#' intercept or not. It is defaulted to TRUE.
 #'
 #' @return
 #' A list that contains the following for the fitted linear regression model:
@@ -31,22 +28,12 @@
 #' @examples
 #' data = read.csv("data/melb_data.csv")
 #' output = lm2(data$Price~data$Bedroom2+data$Bathroom+data$Landsize,data,
-#' na.action="omit",intercept=TRUE)
+#' na.action="omit")
 #' betas = output$coefficients
 #' res = output$residuals
 #'
-lm2 <- function(formula,data,na.action = "omit",intercept= TRUE)
+lm2 <- function(formula,data,na.action = "omit")
 {
-
-  # Subset the data based on the covariates used in the formula
-  covariates = all.vars(formula)[-1]
-  #where = which(colnames(data)==covariates)
-  where = 1:length(covariates)
-  for(i in 1:length(where))
-  {
-    where[i] = which(colnames(data)==covariates[i])
-  }
-  data = data[,where]
 
   # Considers how the missing values in the data will be handled
   if(any(is.na(data)))
@@ -61,15 +48,23 @@ lm2 <- function(formula,data,na.action = "omit",intercept= TRUE)
     }
   }
 
+  # Subset the data based on the covariates used in the formula
+  covariates = all.vars(formula)[-1]
+  #where = which(colnames(data)==covariates)
+  where = 1:length(covariates)
+  for(i in 1:length(where))
+  {
+     where[i] = which(colnames(data)==covariates[i])
+   }
+  data = data[,where]
+
+
   # Parse the formula parameter to get design matrix x and repsonse y
   new_data = model.matrix(formula,data)
   frame <- model.frame(formula, data)
   y = frame[1][,1]
   x = new_data
-  if(intercept==FALSE)
-  {
-    x = x[,-1]
-  }
+
 
   # Size of the design matrix x
   n = nrow(x)
