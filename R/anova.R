@@ -13,7 +13,7 @@
 #' A matrix of (nxp) whose data will be used to form the model.
 #'
 #' @param na.action
-#' How will the missing values be handled. It is defauled to "omit" value.
+#' How will the missing values be handled. It is defaulted to "omit" value.
 #'
 #' @return
 #' A matrix that contains degrees of freedom, sum of squares, mean sum of
@@ -21,7 +21,7 @@
 #' linear regression model.
 #'
 #' @examples
-#' output = anova2(data$Price~data$Bedroom2+data$Bathroom+data$Landsize,melb_data,
+#' output = anova2(melb_data$Price~melb_data$Bedroom2+melb_data$Bathroom+melb_data$Landsize,melb_data,
 #' na.action="omit")
 #' ss = output[,2]
 #' f = output[,4]

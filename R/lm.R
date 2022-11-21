@@ -2,7 +2,7 @@
 #'
 #' @description
 #' Preprocess the data, fits a specified linear regression model, and performs
-#' basic hypothesis testing. It is deisgned to copy some of the values from the
+#' basic hypothesis testing. It is designed to copy some of the values from the
 #' summary of the lm().
 #'
 #' @usage
@@ -15,7 +15,7 @@
 #' A matrix of (nxp) whose data will be used to form the model.
 #'
 #' @param na.action
-#' How will the missing values be handled. It is defauled to "omit" value.
+#' How will the missing values be handled. It is defaulted to "omit" value.
 #'
 #'
 #' @return
@@ -26,7 +26,7 @@
 #' the response
 #'
 #' @examples
-#' output = lm2(data$Price~data$Bedroom2+data$Bathroom+data$Landsize,melb_data,
+#' output = lm2(melb_data$Price~melb_data$Bedroom2+melb_data$Bathroom+melb_data$Landsize,melb_data,
 #' na.action="omit")
 #' betas = output$coefficients
 #' res = output$residuals
