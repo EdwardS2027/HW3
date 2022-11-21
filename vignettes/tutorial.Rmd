@@ -17,8 +17,6 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-library(HW3)
-options(max.print=5)
 ```
 
 
@@ -29,9 +27,14 @@ It will also compare 'lm2' and 'anova2' against 'lm' and 'anova' respectively.
 
 Additionally, this vignette will briefly go over on how to load "melb_data.csv",
 a sample dataset, which we will use for vignette.
+```{r setup1}
+library(HW3)
+options(max.print=5)
+```
+
 
 ## Loading the melbourne housing dataset, so we can test our package.
-```{r setup}
+```{r setup2}
 data <- read.csv("C:/Users/s-edw/Documents/HW3/data/melb_data.csv")
 ```
 
