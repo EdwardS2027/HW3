@@ -51,14 +51,12 @@ lm2 <- function(formula,data,na.action = "omit")
 
   # Subset the data based on the covariates used in the formula
   covariates = all.vars(formula)[-1]
-  #where = which(colnames(data)==covariates)
   where = 1:length(covariates)
   for(i in 1:length(where))
   {
      where[i] = which(colnames(data)==covariates[i])
    }
   data = data[,where]
-
 
   # Parse the formula parameter to get design matrix x and repsonse y
   new_data = model.matrix(formula,data)

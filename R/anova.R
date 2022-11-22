@@ -39,10 +39,10 @@ anova2 <-function(formula,data,na.action = "omit")
   }
 
   # Intializes the neede values from the return of lm2()
-  y = output$y
-  x = output$x
-  SSE = output$SSE
-  SSR = output$SSR
+  y <- output$y
+  x <- output$x
+  SSE <- output$SSE
+  SSR <- output$SSR
   SSY = SSR+SSE
 
   # Initializes empty vectors for desired outputs
