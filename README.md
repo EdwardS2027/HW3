@@ -7,7 +7,7 @@
 
 [![R-CMD-check](https://github.com/EdwardS2027/HW3/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/EdwardS2027/HW3/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/EdwardS2027/HW3/branch/master/graph/badge.svg)](https://codecov.io/gh/EdwardS2027/HW3?branch=master)
+coverage](https://codecov.io/gh/EdwardS2027/HW3/branch/main/graph/badge.svg)](https://codecov.io/gh/EdwardS2027/HW3?branch=main)
 <!-- badges: end -->
 
 ## Overview
