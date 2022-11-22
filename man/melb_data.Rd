@@ -6,9 +6,30 @@
 \title{Melbourne Housing data}
 \format{
 13580 rows and 21 columns
+
+\describe{
+\item{Suburb}{Suburb of the housing}
+\item{Address}{Address of the housing}
+\item{Rooms}{How many rooms does this housing have}
+\item{Type}{Type of housing}
+\item{Price}{Price of Housing}
+\item{Method}{Type of posting of this housing}
+\item{SellerG}{Real Estate Agent of this housing}
+\item{Date}{Date posted for this housing}
+\item{Distance}{Distance from CBD for this housing}
+\item{Postcode}{Postcode of this housing}
+\item{Bedroom2}{How many bedrooms for this housing}
+\item{Bathroom}{How many bathrooms for this housing}
+\item{Car}{How many cars for this housing}
+\item{Landsize}{Size of land for this housing}
+\item{BuildingArea}{Area of the housing}
+\item{YearBuilt}{The year the housing was built}
+\item{CouncilArea}{Council area of this housing}
+\item{Lattitude}{Lattitude of this housing}
+\item{Longtitude}{Longtitude of this housing}
+\item{Regionname}{Region of this housing}
+\item{Propertycount}{How many properties for this housing}
 }
-\source{
-\href{https://www.kaggle.com/code/alexisbcook/missing-values/data?select=melb_data.csv}
 }
 \usage{
 melb_data
@@ -16,7 +37,7 @@ melb_data
 \description{
 Data that was scraped from Domain.com.au weekly. This data give certain
 details about the housing in Melbourne, such as "Rooms", "Price", etc.
-This csv file contains 13580 rows and 21 columns.
+This data was from \url{https://www.kaggle.com/code/alexisbcook/missing-values/data?select=melb_data.csv}
 }
 \examples{
 melb_data
