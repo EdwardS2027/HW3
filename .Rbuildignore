@@ -4,3 +4,4 @@
 ^codecov\.yml$
 ^\.gitlab-ci\.yml$
 ^LICENSE\.md$
+^README\.Rmd$

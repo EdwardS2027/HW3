@@ -187,7 +187,7 @@ output
 ```
 
 
-### Performance Testing~(lm2 vs. lm)
+### Performance Testing~(lm2 vs. lm)~Correctness and Effiencency
 ```{r}
 lm2_output = lm2(melb_data$Price~melb_data$Propertycount+melb_data$YearBuilt+melb_data$Bathroom*melb_data$Bedroom2,melb_data,na.action = "omit")
 lm_output = summary(lm(melb_data$Price~melb_data$Propertycount+melb_data$YearBuilt+melb_data$Bathroom*melb_data$Bedroom2,melb_data,na.action=na.omit))
@@ -243,7 +243,7 @@ bench::mark(as.vector(lm2_output$fstatistic), as.vector(lm_output$fstatistic))
 ```
 
 
-### Performance Testing~(anova2 vs. anova)
+### Performance Testing~(anova2 vs. anova)~Correctness and Effiencency
 ```{r}
 anova2_output = anova2(melb_data$Price~melb_data$Propertycount+melb_data$YearBuilt+melb_data$Bathroom*melb_data$Bedroom2,melb_data,na.action = "omit")
 anova_output = anova(lm(melb_data$Price~melb_data$Propertycount+melb_data$YearBuilt+melb_data$Bathroom*melb_data$Bedroom2,melb_data,na.action=na.omit))
