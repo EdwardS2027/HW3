@@ -86,7 +86,14 @@ lm2 <- function(formula,data,na.action = "omit")
   res = as.vector(y - x%*%betas)
 
   # Estimation of sum of squares
-  SSY = sum((y-mean(y))^2)
+  if("(Intercept)" %in% colnames(x))
+  {
+    SSY = sum((y-mean(y))^2)
+  }
+  else
+  {
+    SSY = sum((y^2))
+  }
   SSE = sum(res^2)
   SSR = SSY-SSE
 

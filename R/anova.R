@@ -100,7 +100,14 @@ anova2 <-function(formula,data,na.action = "omit")
     fitted <- as.vector(new_x%*%betas)
     res = y - fitted
 
-    SSY = sum((y-mean(y))^2)
+    if(intercept==TRUE)
+    {
+      SSY = sum((y-mean(y))^2)
+    }
+    else
+    {
+      SSY = sum((y^2))
+    }
     SSE = sum(res^2)
     SSR = SSY-SSE
     s = SSR - previous
