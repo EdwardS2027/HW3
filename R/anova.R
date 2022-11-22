@@ -31,6 +31,12 @@
 
 anova2 <-function(formula,data,na.action = "omit")
 {
+  #na.action check
+  if( !(na.action %in% c('fail','omit')) )
+  {
+    return(data)
+  }
+
   # Runs the lm2() function to get the needed values for anova
   output = lm2(formula,data,na.action)
   if(is.data.frame(output))
@@ -69,10 +75,9 @@ anova2 <-function(formula,data,na.action = "omit")
   {
     start = 1
   }
-
+  previous =0
   # For each covariate, calculates the sequential sum of squares and binds to
   # correct output vector.
-  previous = 0
   for( i in (start:ncol(x)))
   {
     df = c(df,1)
@@ -99,6 +104,7 @@ anova2 <-function(formula,data,na.action = "omit")
     SSE = sum(res^2)
     SSR = SSY-SSE
     s = SSR - previous
+    print(s)
     ss=c(ss,s)
     MS=c(MS,s)
     previous = SSR

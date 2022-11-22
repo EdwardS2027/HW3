@@ -2,3 +2,5 @@
 ^\.Rproj\.user$
 ^\.github$
 ^codecov\.yml$
+^\.gitlab-ci\.yml$
+^LICENSE\.md$

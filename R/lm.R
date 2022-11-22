@@ -36,6 +36,12 @@
 lm2 <- function(formula,data,na.action = "omit")
 {
 
+  #na.action check
+  if( !(na.action %in% c('fail','omit')) )
+  {
+    return(data)
+  }
+
   # Considers how the missing values in the data will be handled
   if(any(is.na(data)))
   {

@@ -28,7 +28,7 @@ This vignette will give an introduction of 'lm2' and 'anova2'. It will describe
 It will also compare 'lm2' and 'anova2' against 'lm' and 'anova' respectively. 
 ```{r setup1}
 library(HW3)
-options(max.print=5)
+options(max.print=30)
 ```
 
 This package contains two function:
@@ -59,20 +59,20 @@ and help 'anova2' perform analysis of variance.
 ** Simple usage of 'lm2()' ~ simple linear regression
 ```{r lm2-SLR}
 output = lm2(melb_data$Price~melb_data$Landsize,melb_data)
-output
+output$coefficients
 ```
 ** We can chose not to add the intercept to the model by adding -1 in the 
 ** formula parameter like this
 ```{r lm2- no intercept}
 output = lm2(melb_data$Price~-1+melb_data$Landsize,melb_data)
-output
+output$coefficients
 ```
 
 ** Other than simple linear regression model, we can use 'lm2' to create 
 ** multiple linear regression model with the use of '+'
 ```{r lm2-MLR}
 output = lm2(melb_data$Price~melb_data$Landsize+melb_data$YearBuilt,melb_data)
-output
+output$coefficients
 
 ```
 
@@ -81,17 +81,17 @@ output
 ** by adding '*'
 ```{r lm2-interaction}
 output = lm2(melb_data$Price~melb_data$Landsize+melb_data$YearBuilt+melb_data$Bedroom2*melb_data$Rooms,melb_data)
-output
+output$coefficients
 ```
 
 ** 'lm2' can set up reference cell coding scheme or cell means coding scheme to help model categorical variables
 ** by using 'factor()'
 ```{r lm2-categorical variables}
 output = lm2(melb_data$Price~factor(melb_data$Rooms),melb_data)
-output
+output$coefficients
 
 output = lm2(melb_data$Price~-1+factor(melb_data$Rooms),melb_data)
-output
+output$coefficients
 
 ```
 
@@ -104,10 +104,10 @@ output
 ** Otherwise, it will proceed normally.
 ```{r lm2- na.action}
 output = lm2(melb_data$Price~melb_data$Landsize,melb_data,na.action='omit')
-output
+output$coefficients
 
 output = lm2(melb_data$Price~melb_data$Landsize,melb_data,na.action='fail')
-output
+output$coefficients
 
 ```
 
