@@ -5,8 +5,7 @@
 \alias{melb_data}
 \title{Melbourne Housing data}
 \format{
-13580 rows and 21 columns
-
+dataframe with 13580 rows and 21 columns:
 \describe{
 \item{Suburb}{Suburb of the housing}
 \item{Address}{Address of the housing}
