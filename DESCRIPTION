@@ -4,8 +4,11 @@ Title: What the Package Does (Title Case)
 Version: 0.1.0
 Author: Edward Shao
 Maintainer: Edward Shao <eshao@umich.edu>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: 
+    ‘HW3’ package is created for the purpose of copying the lm() and anova() functions, 
+    which can give us the fitted linear regression model and the results of hypothesis testing: 
+    ‘lm2()’ fits the linear regression model based on given formula and data, and returns the values similar to ones given from the ‘summary()’ 
+    ‘anova2()’ performs analysis of varaince on the fitted linear regression model for the purpose of hypothesis testing.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true

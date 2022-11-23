@@ -43,9 +43,12 @@ lm2 is function that fits a linear regression model on a data according to
 the formula provided.
 
 'lm2()' accepts the following parameters:
+
 * 'formula': A framework for how should the linear regression model be given.
   ex: y~x
+  
 * 'data': A matrix of (nxp) whose data will be used to form the model.
+
 * 'na.action': How will the missing values be handled. It is defauled to "omit" value.
 
 'lm2()' returns the following values:
@@ -56,42 +59,42 @@ These values in the list are designed to be same as the ones provided by summary
 and help 'anova2' perform analysis of variance.
 
 
-** Simple usage of 'lm2()' ~ simple linear regression
+** Simple usage of 'lm2()' ~ simple linear regression - returns coefficient
 ```{r lm2-SLR}
 output = lm2(melb_data$Price~melb_data$Landsize,melb_data)
 output$coefficients
 ```
 ** We can chose not to add the intercept to the model by adding -1 in the 
-** formula parameter like this
+** formula parameter like this - returns sigma
 ```{r lm2- no intercept}
 output = lm2(melb_data$Price~-1+melb_data$Landsize,melb_data)
-output$coefficients
+output$sigma
 ```
 
 ** Other than simple linear regression model, we can use 'lm2' to create 
-** multiple linear regression model with the use of '+'
+** multiple linear regression model with the use of '+' - returns r.squared
 ```{r lm2-MLR}
 output = lm2(melb_data$Price~melb_data$Landsize+melb_data$YearBuilt,melb_data)
-output$coefficients
+output$r.squared
 
 ```
 
 
 ** We can opt to add interaction terms to the formula parameter in 'lm2()'
-** by adding '*'
+** by adding '*' - returns adj.r.squared
 ```{r lm2-interaction}
 output = lm2(melb_data$Price~melb_data$Landsize+melb_data$YearBuilt+melb_data$Bedroom2*melb_data$Rooms,melb_data)
-output$coefficients
+output$adj.r.squared
 ```
 
 ** 'lm2' can set up reference cell coding scheme or cell means coding scheme to help model categorical variables
-** by using 'factor()'
+** by using 'factor()' - returns unscaled_cov
 ```{r lm2-categorical variables}
 output = lm2(melb_data$Price~factor(melb_data$Rooms),melb_data)
-output$coefficients
+output$cov.unscaled
 
 output = lm2(melb_data$Price~-1+factor(melb_data$Rooms),melb_data)
-output$coefficients
+output$cov.unscaled
 
 ```
 
@@ -101,13 +104,13 @@ output$coefficients
 ** data.
 ** If na.action is fail, the function will return the data
 ** If the na.action is omit, the function will omit rows ith missing values
-** Otherwise, it will proceed normally.
+** Otherwise, it will proceed normally. - returns var_cov and data
 ```{r lm2- na.action}
 output = lm2(melb_data$Price~melb_data$Landsize,melb_data,na.action='omit')
-output$coefficients
+output$var_cov
 
 output = lm2(melb_data$Price~melb_data$Landsize,melb_data,na.action='fail')
-output$coefficients
+output
 
 ```
 
@@ -119,9 +122,12 @@ To use the function 'anova2':
 regression model given by 'lm2()'. 
 
 'anova2()' accepts the following parameters:
+
 * 'formula': A framework for how should the linear regression model be given.
   ex: y~x
+  
 * 'data': A matrix of (nxp) whose data will be used to form the model.
+
 * 'na.action': How will the missing values be handled. It is defauled to "omit" value.
 
 'anova2()' returns the following values:
